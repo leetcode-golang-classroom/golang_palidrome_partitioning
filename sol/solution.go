@@ -1,12 +1,5 @@
 package sol
 
-import "unsafe"
-
-func Clone(s string) string {
-	b := make([]byte, len(s))
-	copy(b, s)
-	return *(*string)(unsafe.Pointer(&b))
-}
 func partition(s string) [][]string {
 	sLen := len(s)
 	// check
@@ -27,7 +20,7 @@ func partition(s string) [][]string {
 		for end := start; end < sLen; end++ {
 			if s[start] == s[end] && (end-start <= 2 || check[start+1][end-1]) {
 				check[start][end] = true
-				cur := append(cur, Clone(s[start:end+1]))
+				cur := append(cur, s[start:end+1])
 				dfs(end+1, cur)
 				cur = cur[:len(cur)-1]
 			}
